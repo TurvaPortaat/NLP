@@ -1,0 +1,21 @@
+import re
+
+
+# Define a regular expression pattern for Finnish SSNs
+ssn_pattern = '(0\d|[1-2]\d|3[0-1])(0[1-9]|1[0-2])([5-9]\d\+|\d\d-|[01]\dA)\d{3}[\dABCDEFHJKLMNPRSTUVWXY]'
+
+# Example text with names, addresses, email addresses, and Finnish SSNs
+text = '''
+John Doe, born on 01.01.90, 011190-123A, email: johndoe@example.com
+Jane Smith, born on 02.02.80, 220280-456B, email: janesmith@example.com
+Jussi Michaelson, born in Helsinki,this is not valid: 320180-082B
+Some user without a socSecNum but with email: user@example.com
+'''
+
+# Remove Finnish SSNs from the text
+cleaned_text = re.sub(ssn_pattern, 'SSN', text)
+print(cleaned_text)
+John Doe, born on 01.01.90, SSN, email: johndoe@example.com
+Jane Smith, born on 02.02.80, SSN, email: janesmith@example.com
+Jussi Michaelson, born in Helsinki,this is not valid: 320180-082B
+Some user without a socSecNum but with email: user@example.com
